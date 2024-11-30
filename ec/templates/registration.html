@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Customer Registration {% endblock title %}
+
+{% block main-content %}
+<div class="gradient-background" style="background: linear-gradient(to bottom, #ffffff , #dfe9f3);">
+<div class = "container">
+    <br>
+    <div class = "row my-0">
+        <div class = "col-sm-6 offset-sm-3">
+            <h3><center>Customer Registration</center></h3>
+            <hr> <!--Horizontal Line-->
+
+            <form action = "" method="post" novalidate class="shadow p-5">
+                 {% csrf_token %}
+                 {% for fm in form %}
+                    {{fm.label_tag}} {{fm}} <small class = "text-danger">{{fm.errors|striptags}}</small>
+                    <br>
+                 {% endfor %}
+
+                  <div style="text-align: center;">
+                     <input type="submit" value="Submit" class="btn btn-primary" style="background: linear-gradient(to bottom, #00c6fb , #005bea);">
+                  </div>                
+
+                 <div class="text-center text-primary fw-bold">
+                     <small style="margin-right: 10px;">Existing User???
+                     <a href="{% url 'login' %}" class="text-danger" >Login Now</a></small>
+                 </div>
+
+                 {% if form.non_field_errors %}
+                     {% for error in form.non_field_errors %}
+                       <p class="alert alert-danger my-3">{{error}}</p>
+                     {% endfor %}
+                 {% endif %}
+
+                 {% if messages %}
+                 {% for msg in messages %}
+                     <div class="alert alert-{{ msg.tags }} text-center" role="alert">
+                         {{ msg }}
+                     </div>
+                 {% endfor %}
+             {% endif %}
+             
+            </form>
+        </div>
+    </div>
+</div>
+</br> </br>
+</div>
+{% endblock main-content %}

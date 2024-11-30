@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+    search
+{% endblock title %}
+
+{% block main-content %}
+<div class="gradient-background" style="background: linear-gradient(to bottom, #9bc0ea , #fcfcfc);">
+    <div class="container my-0">
+        <br> <br>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="row" style="margin-right: 20px; width: 150%;">
+                    {% if products %}
+                        {% for prod in products %}
+                            <div class="col-sm-4 text-center mb-4 hover-shadow">
+                                <a href="{% url 'productdetail' prod.id %}" class="btn">
+                                    <div class="mb-3" style="margin-right: 20px;"> <!-- Added margin bottom for spacing -->
+                                        <img src="{{ prod.product_image.url }}" width="400px" height="300px" />
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold">{{ prod.title }}</div>
+                                        <div class="fw-bold text-danger">
+                                            Rs.{{ prod.discounted_price }}/-
+                                            <small class="fw-light text-decoration-line-through">{{ prod.selling_price }}</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No products found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
+

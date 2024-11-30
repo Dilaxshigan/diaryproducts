@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %} Address {% endblock title %}
+
+{% block main-content %}
+<div class="gradient-background" style="background: linear-gradient(to bottom, #6898cf , #fcfcfc);">
+<div class="container my-0">
+    <br>
+    <div class="row">
+        <h3>Welcome <span class="text-capitalize">{{request.user}}</span></h3>
+
+    <div class="col-sm-2 border-end">
+        <ul class="list-unstyled">
+            <li class="d-grid"><a href="{% url 'profile' %}" class="btn btn-primary" style="background: linear-gradient(to bottom, #00c6fb , #005bea);">Profile</a></li> 
+            <li class="d-grid"><a href="{% url 'address' %}" class="btn btn-success" style="background: linear-gradient(to bottom, #0ba360 , #3cba92);">Address</a></li>
+        </ul>
+    </div>
+
+    <div class="col-sm-8 offset-sm-1">
+        <div class="row">
+            {% for ad in add %}
+               <div class="col-sm-6">
+                   <div class="card m-2"  style="background: linear-gradient(to bottom, #7daade, #edf1ef);">
+                      <div class="card-body">
+                         <h3>Address {{forloop.counter}}</h3>
+
+                            <p>Name:{{ad.name}}</p>
+                            <p>Locality:{{ad.locality}}</p>
+                            <p>Mobile:{{ad.phone_no}}</p>
+                            <p>City:{{ad.city}}</p>
+                            <p>State:{{ad.state}}</p>
+                            <p>Pincode:{{ad.zipcode}}</p>
+
+                            <p class="text-center"><a href="{% url 'updateAddress' pk=ad.id %}" type="button" class="btn btn-primary" style="background: linear-gradient(to bottom, #00c6fb , #005bea);">Update</a></p>
+                        </div>
+                   </div>
+               </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+   </div>
+</div>
+</br> </br>
+</div>
+{% endblock main-content %}
